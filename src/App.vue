@@ -1,13 +1,5 @@
 <script setup>
-import UserCard from "./components/UserCard.vue";
-
-import useUser from "./composables/useUser";
-import useInfiniteScroll from "./composables/useInfiniteScroll";
-
-const { users, fetchUsers } = useUser("https://randomuser.me/api/?results=10");
-
-fetchUsers();
-useInfiniteScroll(fetchUsers, 100);
+import UsersView from "./views/UsersView.vue";
 </script>
 
 <template>
@@ -18,9 +10,7 @@ useInfiniteScroll(fetchUsers, 100);
 
     <main>
       <div class="content">
-        <div class="flex-container">
-          <UserCard v-for="user in users" :key="user" :user="user"></UserCard>
-        </div>
+        <UsersView></UsersView>
       </div>
     </main>
   </div>
@@ -79,12 +69,5 @@ h1 {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 15px;
-}
-
-.flex-container {
-  gap: 10px;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
 }
 </style>
