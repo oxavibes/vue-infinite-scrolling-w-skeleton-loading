@@ -1,5 +1,6 @@
 <script setup>
 import { toRefs } from "vue";
+
 const props = defineProps({
   user: {
     type: Object,
@@ -35,7 +36,7 @@ let { gender, name, picture, nat, dob, location, email, cell } = toRefs(
   </div>
 </template>
 
-<style scoped>
+<style>
 .card {
   min-width: 350px;
   padding: 20px;
