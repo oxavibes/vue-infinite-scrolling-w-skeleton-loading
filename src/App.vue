@@ -68,6 +68,6 @@ h1 {
 .wrapper {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 15px;
+  padding: 15px;
 }
 </style>
