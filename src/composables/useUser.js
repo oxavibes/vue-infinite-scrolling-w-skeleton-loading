@@ -18,7 +18,9 @@ export default function useUser(baseUrl) {
 
     isLoading.value = true;
 
-    const { results = [] } = await (await fetch(`${baseUrl}`)).json();
+    const { results = [] } = await (
+      await fetch(`${baseUrl}?results=${stepLoad}`)
+    ).json();
 
     setTimeout(() => {
       isLoading.value = false;
