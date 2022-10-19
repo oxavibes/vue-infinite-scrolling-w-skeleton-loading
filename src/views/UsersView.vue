@@ -1,9 +1,9 @@
 <script setup>
 import useUser from "@/composables/useUser";
-import useInfiniteScroll from "../composables/useInfiniteScroll";
+import useInfiniteScroll from "@/composables/useInfiniteScroll";
 
-import UserCard from "@/components/UserCard.vue";
-import UserCardSkeleton from "../components/UserCardSkeleton.vue";
+import UserCardSkeleton from "@/components/UserCardSkeleton.vue";
+import UserCardWrapper from "../components/UserCardWrapper.vue";
 
 const { usersLoaded, fetchUsers, stepLoad, isLoading } = useUser(
   "https://randomuser.me/api/"
@@ -16,11 +16,15 @@ useInfiniteScroll(fetchUsers, 500);
 
 <template>
   <div class="flex-container">
-    <UserCard v-for="user in usersLoaded" :key="user" :user="user"></UserCard>
+    <UserCardWrapper
+      v-for="user in usersLoaded"
+      :key="user"
+      :user="user"
+    ></UserCardWrapper>
 
     <UserCardSkeleton
-      v-for="i in stepLoad"
-      :key="i"
+      v-for="step in stepLoad"
+      :key="step"
       v-show="isLoading"
     ></UserCardSkeleton>
   </div>
