@@ -6,7 +6,7 @@ import UserCard from "@/components/UserCard.vue";
 import UserCardSkeleton from "../components/UserCardSkeleton.vue";
 
 const { usersLoaded, fetchUsers, stepLoad, isLoading } = useUser(
-  "https://randomuser.me/api/?results=10"
+  "https://randomuser.me/api/"
 );
 
 fetchUsers();
