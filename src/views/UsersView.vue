@@ -1,8 +1,8 @@
 <script setup>
 import { ref, onBeforeMount, onMounted, onUnmounted } from "vue";
 
-//Componentes
-import UserCard from "@/components/UserCard.vue";
+//Components
+import UserCardWrapper from "@/components/UserCardWrapper.vue";
 import UserCardSkeleton from "@/components/UserCardSkeleton.vue";
 
 //Composables
@@ -35,7 +35,11 @@ onUnmounted(() => {
 
 <template>
   <div class="flex-container">
-    <UserCard v-for="user in usersLoaded" :key="user" :user="user"></UserCard>
+    <UserCardWrapper
+      v-for="user in usersLoaded"
+      :key="user"
+      :user="user"
+    ></UserCardWrapper>
 
     <UserCardSkeleton
       :key="step"
