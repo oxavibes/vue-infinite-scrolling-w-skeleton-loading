@@ -9,21 +9,12 @@ const props = defineProps({
 });
 
 let { gender, name, picture, dob, location } = toRefs(props.user);
-
-const emit = defineEmits(["imageLoaded"]);
-
-const onLoadImage = () => emit("imageLoaded", true);
 </script>
 
 <template>
   <div class="card">
     <div class="card-content">
-      <img
-        alt="User image"
-        class="card-image"
-        :src="picture.large"
-        @load="onLoadImage"
-      />
+      <img alt="User image" class="card-image" :src="picture.large" />
 
       <div class="card-details">
         <h2>

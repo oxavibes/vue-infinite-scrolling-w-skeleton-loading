@@ -1,32 +1,49 @@
 <script setup>
-import useUser from "@/composables/useUser";
-import useInfiniteScroll from "@/composables/useInfiniteScroll";
+import { ref, onBeforeMount, onMounted, onUnmounted } from "vue";
 
+//Componentes
+import UserCard from "@/components/UserCard.vue";
 import UserCardSkeleton from "@/components/UserCardSkeleton.vue";
-import UserCardWrapper from "../components/UserCardWrapper.vue";
+
+//Composables
+import useUser from "@/composables/useUser";
+import useIntersection from "@/composables/useIntersectionObserver";
 
 const { usersLoaded, fetchUsers, stepLoad, isLoading } = useUser(
   "https://randomuser.me/api/"
 );
 
-fetchUsers();
+const lastElementRef = ref(null);
 
-useInfiniteScroll(fetchUsers, 500);
+const { startObserving, stopObserving } = useIntersection(
+  lastElementRef,
+  fetchUsers
+);
+
+onBeforeMount(() => {
+  fetchUsers();
+});
+
+onMounted(() => {
+  startObserving();
+});
+
+onUnmounted(() => {
+  stopObserving();
+});
 </script>
 
 <template>
   <div class="flex-container">
-    <UserCardWrapper
-      v-for="user in usersLoaded"
-      :key="user"
-      :user="user"
-    ></UserCardWrapper>
+    <UserCard v-for="user in usersLoaded" :key="user" :user="user"></UserCard>
 
     <UserCardSkeleton
-      v-for="step in stepLoad"
       :key="step"
       v-show="isLoading"
+      v-for="step in stepLoad"
     ></UserCardSkeleton>
+
+    <div ref="lastElementRef"></div>
   </div>
 </template>
 
