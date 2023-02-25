@@ -43,7 +43,7 @@ onUnmounted(() => {
       v-for="step in stepLoad"
     ></UserCardSkeleton>
 
-    <div ref="lastElementRef"></div>
+    <div class="last-ref" ref="lastElementRef"></div>
   </div>
 </template>
 
@@ -53,5 +53,9 @@ onUnmounted(() => {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+}
+
+.flex-container .last-ref {
+  flex: 0 0 100%;
 }
 </style>
